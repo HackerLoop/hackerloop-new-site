@@ -54,7 +54,7 @@ module.exports = {
   ],
 
   script: [
-    {src: '/tilt.min.js'}
+    {src: 'tilt.min.js'}
   ],
 
   /*
