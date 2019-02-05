@@ -3,7 +3,7 @@
     <div :class='{mask: true, black: black}'>
       <hero-mask-svg ></hero-mask-svg>
       <div class='background-cropper'>
-        <img src='mask_matter/1.gif' >
+        <img src='/mask_matter/1.gif' >
       </div>
     </div>
   </div>
