@@ -17,6 +17,8 @@ html
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
   font-weight: 400;
+  overflow-x: hidden;
+
 }
 *, *:before, *:after
 {

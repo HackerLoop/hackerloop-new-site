@@ -41,6 +41,10 @@ module.exports = {
   plugins: [
   ],
 
+  script: [
+    {src: '/tilt.min.js'}
+  ],
+
   /*
   ** Nuxt.js modules
   */

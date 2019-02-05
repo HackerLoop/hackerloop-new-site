@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='site'>
     <container>
       <navbar></navbar>
       <div class='header'>
@@ -11,25 +11,35 @@
     <container>
       <about></about>
     </container>
+    <case-studies></case-studies>
     <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Container from '~/components/Container'
 import Navbar from '~/components/Navbar'
 import HeroMask from '~/components/HeroMask'
 import About from '~/components/About'
+import CaseStudies from '~/components/CaseStudies'
 import Footer from '~/components/Footer'
-import Container from '~/components/Container'
 
 export default {
   components: {
-    Navbar, HeroMask, About, Footer, Container
+    Navbar, HeroMask, About, Footer, Container, CaseStudies
+  },
+  head () {
+    return {
+      script: [
+        { src: '/tilt.min.js' }
+      ]
+    }
   }
 }
 </script>
 
 <style lang='scss' scoped>
+
 hr {
   height: 1px;
   background: $border-color;
