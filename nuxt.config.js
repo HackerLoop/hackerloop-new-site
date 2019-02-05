@@ -53,10 +53,6 @@ module.exports = {
     {src: '@/plugins/youtube', ssr: false}
   ],
 
-  script: [
-    {src: 'tilt.min.js'}
-  ],
-
   /*
   ** Nuxt.js modules
   */
