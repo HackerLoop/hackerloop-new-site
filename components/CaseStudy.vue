@@ -1,7 +1,17 @@
 <template>
   <div
-    :class="{'slice': true, black: isBlack}"
+    :class="{'slice': true, black: isBlack, '-video-active': videoActive}"
+    @click='videoActive = true'
   >
+    <div :class='{"video-container": true}' v-if='videoActive'>
+      <no-ssr>
+        <youtube :video-id="youtube_id" class='video'></youtube>
+      </no-ssr>
+
+      <a @click='dismiss' class='cross'>
+        <CrossIcon></CrossIcon>
+      </a>
+    </div>
     <div class='thumbnail-container' ref='thumbnail'>
       <div class='container'>
         <div class='thumbnail' :style='{backgroundImage: `url(case_study/${slug}/thumbnail.jpg)`}'>
@@ -39,10 +49,21 @@
 
 <script>
   import Container from './Container'
+  import CrossIcon from './svg/Cross'
 
   export default {
-    components: { Container },
-    props: ['title', 'slug', 'tagline', 'clients', 'color', 'i'],
+    components: { Container, CrossIcon },
+    props: ['title', 'slug', 'tagline', 'clients', 'color', 'i', 'youtube_id'],
+    methods: {
+      dismiss(e) {
+        this.videoActive = false
+        e.stopPropagation()
+      },
+      ready (event) {
+        this.player = event.target
+        console.log('player ready')
+      },
+    },
     computed: {
       isBlack: function() {
          return this.i % 2 == 0;
@@ -55,18 +76,78 @@
         }
       }
     },
+    data() {
+      return {
+        videoActive: false
+      }
+    },
     mounted() {
-      VanillaTilt.init(this.$refs.thumbnail, {
-          max: 25,
-          speed: 1000,
-          scale: 1.1,
-          reverse: false
-      });
+      var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+         var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+         if (isSafari && iOS) {
+         } else if(isSafari) {
+         } else {
+          VanillaTilt.init(this.$refs.thumbnail, {
+              max: 25,
+              speed: 1000,
+              scale: 1.1,
+              reverse: false
+          });
+         }
+
     }
   }
 </script>
 
 <style lang='scss' scoped>
+  .cross {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: $spacing * 4;
+
+    svg {
+      width: 40px;
+      height: 40px;
+      stroke-width: 1.5;
+    }
+
+  }
+
+  .video-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+
+    .video {
+      max-width: 700px;
+      position: relative;
+      margin: auto;
+      width: 100%;
+      padding-bottom: 31%;
+      border-radius: 10px;
+      overflow: hidden;
+      background: black;
+      height: auto;
+
+      & /deep/ iframe {
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        border: none;
+        bottom: 0;
+      }
+    }
+  }
+
   .thumbnail-container {
     position:absolute;
     top: 0;
@@ -75,7 +156,9 @@
     bottom: 0;
     display: flex;
     align-items: center;
-    z-index: 999;
+    z-index: 9;
+    transform: translate3d(0,0,0);
+    transition: .15s ease-in-out;
   }
   h2 {
     font-weight: 400;
@@ -83,14 +166,22 @@
     margin: 0;
   }
   .slice {
-    height: 400px;
+    height: 500px;
     display: flex;
     align-items: center;
     position: relative;
+    overflow: hidden;
+    cursor: pointer;
 
-    &:hover {
+    &:not(.-video-active):hover {
       .stripe figure {
         transform: translateX(-30px);
+      }
+
+      @media screen and (-webkit-min-device-pixel-ratio:0) {
+        .thumbnail-container {
+          transform: scale(1.1);
+        }
       }
     }
 
@@ -129,7 +220,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-
 
     .stripe {
       flex: 1;
@@ -175,6 +265,7 @@
     margin-left: auto;
     position: relative;
     cursor: pointer;
+    transition: .5s ease-in-out;
 
     &:hover {
       &:before {
@@ -213,6 +304,7 @@
       background-size: cover;
       z-index: -1;
       transition: filter .3s ease;
+
     }
   }
 

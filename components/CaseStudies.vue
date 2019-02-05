@@ -20,7 +20,8 @@
             slug: 'nosulus',
             tagline: 'Hardware productizing',
             clients: ['ubisoft', 'buzzman'],
-            color: '#68D80B'
+            color: '#68D80B',
+            youtube_id: '22KZBhrksbk'
           }
         ]
       }
