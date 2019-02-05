@@ -27,13 +27,6 @@ import Footer from '~/components/Footer'
 export default {
   components: {
     Navbar, HeroMask, About, Footer, Container, CaseStudies
-  },
-  head () {
-    return {
-      script: [
-        { src: '/public/tilt.min.js' }
-      ]
-    }
   }
 }
 </script>

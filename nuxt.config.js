@@ -52,7 +52,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '@/plugins/youtube', ssr: false}
+    {src: '@/plugins/youtube', ssr: false},
+    {src: '@/plugins/tilt.min.js', ssr: false}
   ],
 
   /*
