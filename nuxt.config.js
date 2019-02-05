@@ -3,7 +3,7 @@ const resolve = require('path').resolve
 
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
-    base: '/hackerloop.com/'
+    base: '/hackerloop-new-site/'
   }
 } : {}
 
@@ -55,7 +55,6 @@ module.exports = {
   ** Build configuration
   */
 
-  ...routerBase,
 
   build: {
     /*
@@ -64,6 +63,8 @@ module.exports = {
 
     extend(config, ctx) {
       config.resolve.alias['vue'] = 'vue/dist/vue.common'
+
+      if (!ctx.isDev) { config.output.publicPath = './_nuxt/' }
 
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

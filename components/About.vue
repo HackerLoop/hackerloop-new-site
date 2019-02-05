@@ -3,10 +3,7 @@
     <div class='video'>
     </div>
     <div class='about-content'>
-      <div>
-        <b>HACKERLOOP</b> is a creative tech agency run by a collective of creatives, designers and engineers who love making crazy products
-        and events.
-      </div>
+      <description></description>
       <div class='actions'>
         <btn :icon='"MailIcon"' :href='"mailto:hihackerloop.com"'>hi@hackerloop.com</btn>
         <btn :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>m.me/hackerloop</btn>
@@ -17,9 +14,10 @@
 
 <script>
   import Btn from './Button'
+  import Description from './Description'
 
   export default {
-    components: { Btn }
+    components: { Btn, Description }
   }
 </script>
 

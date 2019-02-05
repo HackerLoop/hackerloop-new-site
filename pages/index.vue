@@ -11,6 +11,7 @@
     <section class='container'>
       <about></about>
     </section>
+    <footer></footer>
   </div>
 </template>
 
@@ -18,10 +19,11 @@
 import Navbar from '~/components/Navbar'
 import HeroMask from '~/components/HeroMask'
 import About from '~/components/About'
+import Footer from '~/components/Footer'
 
 export default {
   components: {
-    Navbar, HeroMask, About
+    Navbar, HeroMask, About, Footer
   }
 }
 </script>
