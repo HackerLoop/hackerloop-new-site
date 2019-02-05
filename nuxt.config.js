@@ -26,7 +26,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' }
     ]
   },
 
@@ -54,7 +54,7 @@ module.exports = {
   ],
 
   script: [
-    {src: '/tilt.min.js'}
+    {src: 'tilt.min.js'}
   ],
 
   /*
