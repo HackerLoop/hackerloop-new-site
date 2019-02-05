@@ -1,17 +1,17 @@
 <template>
   <div>
-    <section class="container">
+    <container>
       <navbar></navbar>
       <div class='header'>
         <hero-mask></hero-mask>
         <h1>Highly engaging live experiences and products  that connect brands to customers</h1>
       </div>
-    </section>
+    </container>
     <hr/>
-    <section class='container'>
+    <container>
       <about></about>
-    </section>
-    <footer></footer>
+    </container>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -20,22 +20,16 @@ import Navbar from '~/components/Navbar'
 import HeroMask from '~/components/HeroMask'
 import About from '~/components/About'
 import Footer from '~/components/Footer'
+import Container from '~/components/Container'
 
 export default {
   components: {
-    Navbar, HeroMask, About, Footer
+    Navbar, HeroMask, About, Footer, Container
   }
 }
 </script>
 
-<style lang='scss'>
-.container
-{
-  max-width: 724px;
-  margin: auto;
-  padding: 0 12px;
-}
-
+<style lang='scss' scoped>
 hr {
   height: 1px;
   background: $border-color;
@@ -45,6 +39,7 @@ hr {
 .header {
   padding: ($spacing * 8) 0;
   padding-top: $spacing * 11;
+  text-align: center;
 
   @media(max-width: 650px) {
     padding-top: $spacing * 13 !important;

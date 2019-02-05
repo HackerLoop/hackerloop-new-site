@@ -1,7 +1,7 @@
 <template>
-  <div class='container'>
-    <div class='mask'>
-      <hero-mask-svg></hero-mask-svg>
+  <div>
+    <div :class='{mask: true, black: black}'>
+      <hero-mask-svg ></hero-mask-svg>
       <div class='background-cropper'>
         <img src='/mask_matter/1.gif' >
       </div>
@@ -12,18 +12,21 @@
 <script>
   import HeroMaskSvg from './svg/hero_mask'
   export default {
+    props: ['black'],
     components: { HeroMaskSvg }
   }
 </script>
 
 <style scoped lang='scss'>
-.container {
-  text-align: center;
-}
-
 .mask {
   display: inline-block;
   position: relative;
+
+  &.black {
+    & /deep/ svg path {
+      fill: black;
+    }
+  }
 }
 
 svg {

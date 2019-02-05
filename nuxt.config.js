@@ -1,12 +1,6 @@
 const pkg = require('./package')
 const resolve = require('path').resolve
 
-const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
-  router: {
-    base: '/hackerloop-new-site/'
-  }
-} : {}
-
 module.exports = {
   mode: 'universal',
 

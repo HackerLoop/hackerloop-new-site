@@ -32,6 +32,7 @@
     margin-right: $spacing;
     flex: 1;
     cursor: pointer;
+    background: white;
 
     &:hover {
       border: 1px solid darken($border-color, 10%);
