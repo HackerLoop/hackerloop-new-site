@@ -46,6 +46,8 @@ module.exports = {
 
   ],
 
+  ...routerBase,
+
   /*
   ** Plugins to load before mounting the App
   */
