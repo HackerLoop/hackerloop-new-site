@@ -4,9 +4,11 @@
     @click='videoActive = true'
   >
     <div :class='{"video-container": true}' v-if='videoActive'>
-      <no-ssr>
-        <youtube :video-id="youtube_id" class='video'></youtube>
-      </no-ssr>
+      <div class='video'>
+        <no-ssr>
+          <youtube @ready='playerReady' :video-id="youtube_id" ref="youtube" ></youtube>
+        </no-ssr>
+      </div>
 
       <a @click='dismiss' class='cross'>
         <CrossIcon></CrossIcon>
@@ -59,10 +61,9 @@
         this.videoActive = false
         e.stopPropagation()
       },
-      ready (event) {
-        this.player = event.target
-        console.log('player ready')
-      },
+      playerReady(e) {
+        this.player.playVideo()
+      }
     },
     computed: {
       isBlack: function() {
@@ -74,6 +75,9 @@
         } else {
           return 'white.png'
         }
+      },
+      player() {
+        return this.$refs.youtube.player
       }
     },
     data() {
@@ -114,6 +118,12 @@
 
   }
 
+  @keyframes bounceIn {
+    to {
+      transform: scale(1) translateX(0);
+    }
+  }
+
   .video-container {
     position: absolute;
     left: 0;
@@ -134,6 +144,10 @@
       overflow: hidden;
       background: black;
       height: auto;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      animation: bounceIn .5s ease-in-out forwards;
+      transform: scale(.5) translateX(25%);
+      transform-origin: right;
 
       & /deep/ iframe {
         width: 100%;
@@ -152,13 +166,13 @@
     position:absolute;
     top: 0;
     left: 0;
+    opacity: 1;
     right: 0;
     bottom: 0;
     display: flex;
     align-items: center;
     z-index: 9;
     transform: translate3d(0,0,0);
-    transition: .15s ease-in-out;
   }
   h2 {
     font-weight: 400;
@@ -172,6 +186,14 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
+
+    &.-video-active {
+
+      .thumbnail-container {
+        opacity: 0;
+      }
+
+    }
 
     &:not(.-video-active):hover {
       .stripe figure {
