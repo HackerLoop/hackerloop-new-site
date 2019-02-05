@@ -1,6 +1,9 @@
 <template>
   <div class='about'>
-    <div class='video'>
+    <div
+      class='video'
+      :style="{'background-image': `url(misc/about.jpg)`}"
+    >
     </div>
     <div class='about-content'>
       <description></description>
@@ -35,7 +38,6 @@
     flex: 0 0 312px;
     max-width: 312px;
     background-size: cover !important;
-    background-image: url('/misc/about.jpg');
     background-position: center center !important;
     margin-right: $spacing * 3;
     border-radius: $video-radius;
