@@ -1,10 +1,10 @@
 <template>
   <div
-    :class="{'slice': true, black: isBlack, '-video-active': videoActive}"
+    :class="{'slice': true, black: isBlack, '-video-active': videoActive, [slug]: true}"
     @click='videoActive = true'
   >
-    <div :class='{"video-container": true}' v-if='videoActive'>
-      <div class='video'>
+    <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive'>
+      <div class='video' :style='{height: height}'>
         <no-ssr>
           <youtube @ready='playerReady' :video-id="youtube_id" ref="youtube" ></youtube>
         </no-ssr>
@@ -25,16 +25,17 @@
         class='background'
       >
         <figure
+          v-if='isBlack'
           :style="{'background-image': `url(case_study/${slug}/background.jpg)`}"
         ></figure>
       </div>
       <div class='helper'></div>
       <div class='stripe'>
-        <figure :style='{background: color}'></figure>
+        <figure :style='{backgroundColor: color, backgroundImage: `url(case_study/${slug}/pattern.jpg)`}'></figure>
       </div>
     </div>
     <container>
-      <div>
+      <div class='content'>
         <h2 :style='{color: color}'>{{title}}</h2>
         <div class='tagline'>{{tagline}}</div>
         <div class='clients'>
@@ -55,7 +56,7 @@
 
   export default {
     components: { Container, CrossIcon },
-    props: ['title', 'slug', 'tagline', 'clients', 'color', 'i', 'youtube_id'],
+    props: ['title', 'slug', 'tagline', 'clients', 'color', 'i', 'youtube_id', 'height'],
     methods: {
       dismiss(e) {
         this.videoActive = false
@@ -104,15 +105,26 @@
 </script>
 
 <style lang='scss' scoped>
+
+  .content {
+    padding-right: $spacing * 5;
+  }
   .cross {
     position: absolute;
     right: 0;
     top: 0;
     margin: $spacing * 4;
+    opacity: .8;
+
+
+    &:hover {
+      opacity: 1;
+    }
 
     svg {
       width: 40px;
       height: 40px;
+      stroke: white;
       stroke-width: 1.5;
     }
 
@@ -139,11 +151,10 @@
       position: relative;
       margin: auto;
       width: 100%;
-      padding-bottom: 31%;
       border-radius: 10px;
       overflow: hidden;
       background: black;
-      height: auto;
+
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
       animation: bounceIn .5s ease-in-out forwards;
       transform: scale(.5) translateX(25%);
@@ -187,10 +198,30 @@
     overflow: hidden;
     cursor: pointer;
 
+    &.twitchcon17 {
+      .stripe figure {
+        background-size: 600px !important;
+      }
+    }
+
+    &.watch_dogs_2 {
+      .background figure {
+        background-position: left center !important;
+      }
+
+      .stripe figure {
+        background-size: cover !important;
+      }
+    }
+
     &.-video-active {
 
       .thumbnail-container {
         opacity: 0;
+      }
+
+      .thumbnail {
+        transform: scale(1.7) translateX(-20%);
       }
 
     }
@@ -198,6 +229,10 @@
     &:not(.-video-active):hover {
       .stripe figure {
         transform: translateX(-30px);
+      }
+
+      .thumbnail {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
       }
 
       @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -254,6 +289,7 @@
         left: 0;
         bottom: 0;
         right: -30px;
+        background-size: 220px !important;
       }
     }
 
@@ -288,7 +324,7 @@
     position: relative;
     cursor: pointer;
     transition: .5s ease-in-out;
-
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     &:hover {
       &:before {
         opacity: 1;
@@ -315,17 +351,17 @@
     }
 
     &:after {
-      transform: scale(0.95) translateY(5px) translateZ(-30px);
-      filter: blur(10px);
-      opacity: 1;
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: inherit; // Neat huh! :)
-      background-size: cover;
-      z-index: -1;
-      transition: filter .3s ease;
+      // transform: scale(0.95) translateY(5px) translateZ(-30px);
+      // filter: blur(10px);
+      // opacity: 1;
+      // content: '';
+      // position: absolute;
+      // width: 100%;
+      // height: 100%;
+      // background-image: inherit; // Neat huh! :)
+      // background-size: cover;
+      // z-index: -1;
+      // transition: filter .3s ease;
 
     }
   }
