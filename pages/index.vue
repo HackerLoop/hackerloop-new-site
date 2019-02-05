@@ -31,7 +31,7 @@ export default {
   head () {
     return {
       script: [
-        { src: '/tilt.min.js' }
+        { src: 'tilt.min.js' }
       ]
     }
   }
