@@ -52,6 +52,7 @@ hr {
 
   h1 {
     font-size: 31px;
+    letter-spacing: -1px;
     font-weight: 200;
     text-align: center;
     margin-top: $spacing * 3;
