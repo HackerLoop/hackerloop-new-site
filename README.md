@@ -16,7 +16,7 @@ $ yarn run dev
 ## Deployment
 
 ``` bash
-# build + deploy to gh-pages branch
+# build + deploy to hackerloop.github.io/hackerloop.com
 $ yarn deploy
 ```
 
