@@ -1,7 +1,18 @@
 const pkg = require('./package')
 const resolve = require('path').resolve
 
+/* nuxt.config.js */
+// only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
+const base = process.env.DEPLOY_ENV === 'GH_PAGES' ? '/hackerloop-new-site/' : '';
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: base
+  }
+} : {}
+
 module.exports = {
+
+
   mode: 'universal',
 
   /*
