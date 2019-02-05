@@ -35,7 +35,7 @@
     flex: 0 0 312px;
     max-width: 312px;
     background-size: cover !important;
-    background-image: url(/misc/about.jpg);
+    background-image: url(misc/about.jpg);
     background-position: center center !important;
     margin-right: $spacing * 3;
     border-radius: $video-radius;
