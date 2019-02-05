@@ -1,6 +1,12 @@
 const pkg = require('./package')
 const resolve = require('path').resolve
 
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/hackerloop.com/'
+  }
+} : {}
+
 module.exports = {
   mode: 'universal',
 
@@ -48,6 +54,9 @@ module.exports = {
   /*
   ** Build configuration
   */
+
+  ...routerBase,
+
   build: {
     /*
     ** You can extend webpack config here
