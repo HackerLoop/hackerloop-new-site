@@ -104,18 +104,24 @@
     flex-flow: column;
     line-height: 1.2;
     margin-top: $spacing * 3;
+    text-align: center;
 
     @media(max-width: 710px) {
       font-size: 16px;
-      max-width: 312px;
+      max-width: 400px;
       margin: auto;
       padding: 0;
+      margin-top: $spacing * 5;
     }
 
     .actions {
       margin-top: auto;
       display: flex;
       padding-top: $spacing * 1.5;
+
+      max-width: 600px;
+      margin: auto;
+      width: 100%;
 
       @media(max-width: 650px) {
         padding-top: $spacing * 2;
