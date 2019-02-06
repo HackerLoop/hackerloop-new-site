@@ -174,6 +174,12 @@
       animation: bounceIn .5s ease-in-out forwards;
       transform: scale(.5) translateX(25%);
       transform-origin: right;
+      @media(max-width: 700px) {
+        transform-origin: center;
+
+        height: 270px !important;
+        border-radius: 0 !important;
+      }
 
       & /deep/ iframe {
         width: 100%;
