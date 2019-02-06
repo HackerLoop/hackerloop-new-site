@@ -1,7 +1,12 @@
 <template>
   <div>
     <div v-for='(item, i) in items' :key='i'>
-      <case-study :i='i' v-bind='item'></case-study>
+      <case-study
+        :i='i'
+        :setActiveCase='setActiveCase'
+        :activeCase='activeCase'
+        v-bind='item'
+      ></case-study>
     </div>
   </div>
 
@@ -12,11 +17,14 @@
 
   export default {
     components: { CaseStudy },
-    methods() {
-
+    methods: {
+      setActiveCase(slug) {
+        this.activeCase = slug
+      }
     },
     data() {
       return {
+        activeCase: null,
         items: [
           {
             title: 'Nosulus Rift',
@@ -53,7 +61,7 @@
             tagline: 'Twitch extension and event management',
             clients: ['ubisoft', 'divimode'],
             color: '#6441A5',
-            youtube_id: '6Y1dq1RvzHk',
+            youtube_id: 'N47eYIFGBBo',
             height: '394px'
           }
         ]

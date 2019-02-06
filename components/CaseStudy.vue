@@ -1,7 +1,6 @@
 <template>
   <div
     :class="{'slice': true, black: isBlack, '-video-active': videoActive, [slug]: true}"
-    @click='videoActive = true'
   >
     <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive'>
       <div class='video' :style='{height: height}'>
@@ -16,7 +15,11 @@
     </div>
     <div class='thumbnail-container' ref='thumbnail'>
       <div class='container'>
-        <div class='thumbnail' :style='{backgroundImage: `url(case_study/${slug}/thumbnail.jpg)`}'>
+        <div
+          class='thumbnail'
+          :style='{backgroundImage: `url(case_study/${slug}/thumbnail.jpg)`}'
+          @click='() => this.setActiveCase(this.slug)'
+        >
         </div>
       </div>
     </div>
@@ -56,10 +59,10 @@
 
   export default {
     components: { Container, CrossIcon },
-    props: ['title', 'slug', 'tagline', 'clients', 'color', 'i', 'youtube_id', 'height'],
+    props: ['title', 'slug', 'tagline', 'clients', 'color', 'i', 'youtube_id', 'height', 'activeCase', 'setActiveCase'],
     methods: {
       dismiss(e) {
-        this.videoActive = false
+        this.setActiveCase(null)
         e.stopPropagation()
       },
       playerReady(e) {
@@ -100,6 +103,16 @@
           });
          }
 
+    },
+    watch: {
+      activeCase: function(newVal, oldVal) {
+        console.log(newVal)
+        if(newVal == this.slug) {
+          this.videoActive = true
+        } else {
+          this.videoActive = false
+        }
+      }
     }
   }
 </script>
