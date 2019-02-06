@@ -40,7 +40,7 @@
     background: white;
 
     &.email {
-      background: #272c3014;
+      background: rgba($black, .08);
       border: none;
       box-shadow: none;
       cursor: text;
@@ -65,7 +65,6 @@
       font-size: 16px;
 
       input {
-        color: rgba($black, .8);
         font-size: 16px;
       }
 
@@ -95,6 +94,8 @@
       font-size: 14px;
       font-family: "Metropolis";
       color: $black;
+      color: rgba($black, .8);
+
     }
 
     &:last-child {

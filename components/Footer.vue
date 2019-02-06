@@ -9,7 +9,7 @@
     </div>
     <div class='actions'>
       <btn :icon='"MailIcon"' :email='true' value='hi@hackerloop.com' >hi@hackerloop.com</btn>
-      <btn :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>m.me/hackerloop</btn>
+      <btn :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>Messenger</btn>
       <a class='place input'>
         <place-icon></place-icon>
         <label>

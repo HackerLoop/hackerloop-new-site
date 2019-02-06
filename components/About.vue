@@ -10,7 +10,7 @@
       <description></description>
       <div class='actions'>
         <btn value='hi@hackerloop.com' :big='true' :email='true' :icon='"MailIcon"' :href='"mailto:hihackerloop.com"'>hi@hackerloop.com</btn>
-        <btn :big='true' :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>m.me/hackerloop</btn>
+        <btn :big='true' :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>Contact us on messenger</btn>
       </div>
     </div>
   </div>
