@@ -3,7 +3,7 @@
     <container>
       <navbar></navbar>
       <div class='header'>
-        <hero-mask></hero-mask>
+        <hero-mask :gif='"0.gif"'></hero-mask>
         <h1>Highly engaging live experiences and products  that connect brands to customers</h1>
       </div>
     </container>
