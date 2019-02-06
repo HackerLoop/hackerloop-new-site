@@ -108,6 +108,21 @@
 
   .content {
     padding-right: $spacing * 5;
+    @media(max-width: 700px) {
+      padding-right: 0;
+      padding-top: $spacing * 4;
+      text-align: center;
+      margin: auto;
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .tagline {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
   }
   .cross {
     position: absolute;
@@ -184,7 +199,16 @@
     align-items: center;
     z-index: 9;
     transform: translate3d(0,0,0);
+    @media(max-width: 700px) {
+      display: block;
+      position: relative;
+
+      .thumbnail {
+        margin: auto;
+      }
+    }
   }
+
   h2 {
     font-weight: 400;
     font-size: 32px;
@@ -197,6 +221,13 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
+
+    @media (max-width: 700px) {
+      display: block;
+      padding-top: $spacing * 20;
+      height: auto;
+      padding-bottom: $spacing * 10;
+    }
 
     &.twitchcon17 {
       .stripe figure {
@@ -229,6 +260,10 @@
     &:not(.-video-active):hover {
       .stripe figure {
         transform: translateX(-30px);
+
+        @media (max-width: 700px) {
+          transform: translateX(0);
+        }
       }
 
       .thumbnail {
@@ -281,6 +316,15 @@
     .stripe {
       flex: 1;
       position: relative;
+
+      @media (max-width: 700px) {
+        position: absolute;
+        left: -100px;
+        right: 0;
+        top: -80px;
+        height: 150px;
+        transform: rotate(-5deg);
+      }
 
       figure {
         transition: .1s ease-in-out;
