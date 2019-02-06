@@ -85,7 +85,7 @@
   .input.email {
     background: transparent;
     box-shadow: none;
-
+    margin-bottom: 0;
 
     ::selection {
       background: white;
