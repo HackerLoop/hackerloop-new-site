@@ -34,7 +34,7 @@
       </div>
       <div class='helper'></div>
       <div class='stripe'>
-        <figure :style='{backgroundColor: color, backgroundImage: `url(case_study/${slug}/pattern.jpg)`}'></figure>
+        <figure :style='{backgroundColor: color, backgroundImage: pattern ? `url(case_study/${slug}/pattern.jpg)` : false}'></figure>
       </div>
     </div>
     <container>
@@ -59,7 +59,7 @@
 
   export default {
     components: { Container, CrossIcon },
-    props: ['title', 'slug', 'tagline', 'clients', 'color', 'i', 'youtube_id', 'height', 'activeCase', 'setActiveCase'],
+    props: ['title', 'slug', 'tagline', 'clients', 'color', 'i', 'youtube_id', 'activeCase', 'setActiveCase', 'pattern'],
     methods: {
       dismiss(e) {
         this.setActiveCase(null)

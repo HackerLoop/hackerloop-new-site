@@ -32,8 +32,8 @@
             tagline: 'Hardware productizing',
             clients: ['ubisoft', 'buzzman'],
             color: '#68D80B',
-            youtube_id: '22KZBhrksbk',
-            height: '394px'
+            pattern: false,
+            youtube_id: '22KZBhrksbk'
 
           },
           {
@@ -42,8 +42,7 @@
             tagline: 'Twitch extension and event management',
             clients: ['redbull'],
             color: '#E21B4D',
-            youtube_id: 'qlJlXFYFlhc',
-            height: '394px'
+            youtube_id: 'qlJlXFYFlhc'
 
           },
           {
@@ -52,8 +51,7 @@
             tagline: 'Twitch extension and event management',
             clients: ['ubisoft'],
             color: '#B900FF',
-            youtube_id: '6Y1dq1RvzHk',
-            height: '394px'
+            youtube_id: '6Y1dq1RvzHk'
           },
           {
             title: 'TwitchCon17',
@@ -61,8 +59,7 @@
             tagline: 'Twitch extension and event management',
             clients: ['ubisoft', 'divimode'],
             color: '#6441A5',
-            youtube_id: 'N47eYIFGBBo',
-            height: '394px'
+            youtube_id: 'N47eYIFGBBo'
           }
         ]
       }

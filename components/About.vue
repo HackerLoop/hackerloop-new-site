@@ -44,6 +44,7 @@
     position: relative;
     display: block;
     cursor: pointer;
+    background-color: #E7E3E0;
 
     &:hover {
       &:before {
