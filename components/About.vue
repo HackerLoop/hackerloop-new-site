@@ -2,14 +2,15 @@
   <div class='about'>
     <div
       class='video'
-      :style="{'background-image': `url(misc/about.jpg)`}"
+      :style="{background: 'url(misc/about.jpg)'}"
     >
+    <img src='misc/about.jpg' />
     </div>
     <div class='about-content'>
       <description></description>
       <div class='actions'>
-        <btn :icon='"MailIcon"' :href='"mailto:hihackerloop.com"'>hi@hackerloop.com</btn>
-        <btn :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>m.me/hackerloop</btn>
+        <btn value='hi@hackerloop.com' :big='true' :email='true' :icon='"MailIcon"' :href='"mailto:hihackerloop.com"'>hi@hackerloop.com</btn>
+        <btn :big='true' :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>m.me/hackerloop</btn>
       </div>
     </div>
   </div>
@@ -26,23 +27,53 @@
 
 <style lang='scss' scoped>
   .about {
+    position: relative;
+    z-index: 1;
     padding: ($spacing * 5) 0;
-    display: flex;
+    padding-top: 0;
     @media(max-width: 650px) {
       display: block;
     }
   }
 
   .video {
-    height: 176px;
-    flex: 0 0 312px;
-    max-width: 312px;
+    max-width: 100%;
     background-size: cover !important;
     background-position: center center !important;
-    margin-right: $spacing * 3;
     border-radius: $video-radius;
     position: relative;
     display: block;
+    cursor: pointer;
+
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
+    }
+    &:before {
+      content: '';
+      width: 40px;
+      height: 40px;
+      background: white;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      margin: auto;
+      transform: rotate(90deg);
+      opacity: .8;
+      transition: .15s ease-in-out;
+
+      /* The points are: centered top, left bottom, right bottom */
+      clip-path: polygon(50% 20%, 0 100%, 100% 100%);
+    }
+
+    img {
+      width: 100%;
+      border-radius: $video-radius;
+      display: block;
+    }
 
     @media(max-width: 650px) {
       margin: auto !important;
@@ -50,11 +81,12 @@
     }
 
     &:after {
-      transform: scale(0.95) translateY(5px) translateZ(-30px);
+      transform: scale(1) translateY(0) translateZ(0);
       filter: blur(10px);
       opacity: 0.9;
       content: '';
       position: absolute;
+      top: 0;
       width: 100%;
       height: 100%;
       background-image: inherit; // Neat huh! :)
@@ -70,6 +102,7 @@
     display: flex;
     flex-flow: column;
     line-height: 1.2;
+    margin-top: $spacing * 3;
 
     @media(max-width: 710px) {
       font-size: 16px;
@@ -90,7 +123,7 @@
       @media(max-width: 710px) {
         display: block;
 
-        & /deep/ a {
+        & /deep/ .input {
           margin: 0;
           display: flex;
           margin-bottom: $spacing;

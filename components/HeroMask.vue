@@ -42,12 +42,12 @@ svg {
 
 .background-cropper {
   position: absolute;
-  left: 0;
-  right: 2px;
-  bottom: 1px;
-  top: 0;
   overflow: hidden;
   background: $black;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  top: 2px;
 
   img {
     width: 100%;

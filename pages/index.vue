@@ -7,7 +7,6 @@
         <h1>Highly engaging live experiences and products  that connect brands to customers</h1>
       </div>
     </container>
-    <hr/>
     <container>
       <about></about>
     </container>

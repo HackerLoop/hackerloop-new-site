@@ -8,9 +8,9 @@
       </div>
     </div>
     <div class='actions'>
-      <btn :icon='"MailIcon"' :href='"mailto:hihackerloop.com"'>hi@hackerloop.com</btn>
+      <btn :icon='"MailIcon"' :email='true' value='hi@hackerloop.com' >hi@hackerloop.com</btn>
       <btn :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>m.me/hackerloop</btn>
-      <a class='place'>
+      <a class='place input'>
         <place-icon></place-icon>
         <label>
           Paris, Berlin & Tallin
@@ -81,11 +81,12 @@
   @media(max-width: 650px) {
     margin: auto;
   }
-  a {
+  .input {
     display: flex;
     margin-bottom: $spacing;
     border :none;
     box-shadow: 0px -1.5px inset rgba($black, .4);
+    background: white;
 
     &.place {
       line-height: 32px;
@@ -98,6 +99,7 @@
       border: 1px solid #595959;
       line-height: 32px;
       border-radius: 20em;
+      background: transparent;
       box-shadow: none;
       label {
         flex: 1 ;

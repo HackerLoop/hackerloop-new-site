@@ -2,17 +2,6 @@
   <div
     :class="{'slice': true, black: isBlack, '-video-active': videoActive, [slug]: true}"
   >
-    <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive'>
-      <div class='video' :style='{height: height}'>
-          <no-ssr>
-            <youtube @ready='playerReady' :video-id="youtube_id" ref="youtube" ></youtube>
-          </no-ssr>
-      </div>
-
-      <a @click='dismiss' class='cross'>
-        <CrossIcon></CrossIcon>
-      </a>
-    </div>
     <div class='thumbnail-container' ref='thumbnail'>
       <div class='container'>
         <div
@@ -20,6 +9,17 @@
           :style='{backgroundImage: `url(case_study/${slug}/thumbnail.jpg)`}'
           @click='() => this.setActiveCase(this.slug)'
         >
+          <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive'>
+            <div class='video'>
+                <no-ssr>
+                  <youtube @ready='playerReady' :video-id="youtube_id" ref="youtube" ></youtube>
+                </no-ssr>
+            </div>
+
+            <a @click='dismiss' class='cross'>
+              <CrossIcon :color='color'></CrossIcon>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -91,25 +91,6 @@
       }
     },
 
-    mounted() {
-      // this.player.on('ready', () => {
-      //   this.player.play
-      // })
-
-      var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-         var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-         if (isSafari && iOS) {
-         } else if(isSafari) {
-         } else {
-          VanillaTilt.init(this.$refs.thumbnail, {
-              max: 25,
-              speed: 1000,
-              scale: 1.1,
-              reverse: false
-          });
-         }
-
-    },
     watch: {
       activeCase: function(newVal, oldVal) {
         console.log(newVal)
@@ -126,7 +107,8 @@
 <style lang='scss' scoped>
 
   .content {
-    padding-right: $spacing * 5;
+    padding-right: $spacing * 10;
+    max-width: 400px;
     @media(max-width: 700px) {
       padding-right: 0;
       padding-top: $spacing * 4;
@@ -138,6 +120,7 @@
       }
 
       .tagline {
+        line-height: 1.2;
         font-size: 14px;
         font-weight: 400;
       }
@@ -147,27 +130,25 @@
     position: absolute;
     right: 0;
     top: 0;
-    margin: $spacing * 4;
-    opacity: .8;
-
+    margin: -($spacing * 2);
+    background: white;
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       opacity: 1;
     }
 
     svg {
-      width: 40px;
-      height: 40px;
-      stroke: white;
-      stroke-width: 1.5;
+      width: 24px;
+      height: 24px;
+      stroke-width: 2;
     }
 
-  }
-
-  @keyframes bounceIn {
-    to {
-      transform: scale(1) translateX(0);
-    }
   }
 
   .video-container {
@@ -181,18 +162,14 @@
     align-items: center;
 
     .video {
-      max-width: 700px;
       position: relative;
       margin: auto;
+      height: 100%;
       width: 100%;
       border-radius: 10px;
       overflow: hidden;
       background: black;
-
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-      animation: bounceIn .5s ease-in-out forwards;
-      transform: scale(.5) translateX(25%);
-      transform-origin: right;
 
       & /deep/ iframe {
         width: 100%;
@@ -234,12 +211,18 @@
     margin: 0;
   }
   .slice {
-    height: 500px;
+    height: 400px;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
     cursor: pointer;
+
+    &.-video-active {
+      .thumbnail {
+        transform: scale(1);
+      }
+    }
 
     @media (max-width: 700px) {
       display: block;
@@ -264,37 +247,6 @@
       }
     }
 
-    &.-video-active {
-
-      .thumbnail-container {
-        opacity: 0;
-      }
-
-      .thumbnail {
-        transform: scale(1.7) translateX(-20%);
-      }
-
-    }
-
-    &:not(.-video-active):hover {
-      .stripe figure {
-        transform: translateX(-30px);
-
-        @media (max-width: 700px) {
-          transform: translateX(0);
-        }
-      }
-
-      .thumbnail {
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-      }
-
-      @media screen and (-webkit-min-device-pixel-ratio:0) {
-        .thumbnail-container {
-          transform: scale(1.1);
-        }
-      }
-    }
 
     .container {
       width: 100%;
@@ -379,16 +331,24 @@
   }
 
   .thumbnail {
-    width: 300px;
-    height: 168px;
+    width: 330px;
+    height: 184px;
     border-radius: $video-radius;
     background-size: cover !important;
     margin-left: auto;
     position: relative;
     cursor: pointer;
-    transition: .5s ease-in-out;
+    transition: .15s transform ease-in-out;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transform: scale(.9);
+    transform-origin: right;
+
+    @media(max-width: 700px) {
+      transform-origin: center;
+    }
+
     &:hover {
+      transform: scale(1);
       &:before {
         opacity: 1;
       }
@@ -411,21 +371,6 @@
 
       /* The points are: centered top, left bottom, right bottom */
       clip-path: polygon(50% 20%, 0 100%, 100% 100%);
-    }
-
-    &:after {
-      // transform: scale(0.95) translateY(5px) translateZ(-30px);
-      // filter: blur(10px);
-      // opacity: 1;
-      // content: '';
-      // position: absolute;
-      // width: 100%;
-      // height: 100%;
-      // background-image: inherit; // Neat huh! :)
-      // background-size: cover;
-      // z-index: -1;
-      // transition: filter .3s ease;
-
     }
   }
 

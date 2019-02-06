@@ -19,6 +19,11 @@ html
   font-weight: 400;
   overflow-x: hidden;
 
+  *::selection {
+    background: $black;
+    color: white;
+  }
+
 }
 *, *:before, *:after
 {
