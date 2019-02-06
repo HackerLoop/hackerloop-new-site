@@ -4,9 +4,15 @@
   >
     <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive'>
       <div class='video' :style='{height: height}'>
-        <no-ssr>
-          <youtube @ready='playerReady' :video-id="youtube_id" ref="youtube" ></youtube>
-        </no-ssr>
+
+          <vue-plyr ref='plyr' :options='{autoplay: true}' >
+            <div class="plyr__video-embed" @click='(e)=>e.stopPropagation()'>
+              <iframe
+                :src="`https://www.youtube.com/embed/${youtube_id}?iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1`"
+                allowfullscreen allowtransparency allow="autoplay">
+              </iframe>
+            </div>
+          </vue-plyr>
       </div>
 
       <a @click='dismiss' class='cross'>
@@ -64,10 +70,8 @@
       dismiss(e) {
         this.setActiveCase(null)
         e.stopPropagation()
-      },
-      playerReady(e) {
-        this.player.playVideo()
       }
+
     },
     computed: {
       isBlack: function() {
@@ -80,8 +84,8 @@
           return 'white.png'
         }
       },
-      player() {
-        return this.$refs.youtube.player
+      player () {
+        return this.$refs.plyr.player
       }
     },
     data() {
@@ -89,7 +93,12 @@
         videoActive: false
       }
     },
+
     mounted() {
+      // this.player.on('ready', () => {
+      //   this.player.play
+      // })
+
       var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
          var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
          if (isSafari && iOS) {

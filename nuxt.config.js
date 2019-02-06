@@ -43,7 +43,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
-
+    'vue-plyr/dist/vue-plyr.css'
   ],
 
   ...routerBase,
@@ -52,8 +52,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '@/plugins/youtube', ssr: false},
-    {src: '@/plugins/tilt.min.js', ssr: false}
+    {src: '@/plugins/tilt.min.js', ssr: false},
+    {src: '@/plugins/plyr', ssr: false}
   ],
 
   /*
