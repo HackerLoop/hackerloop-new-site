@@ -34,13 +34,13 @@
     display: inline-flex;
     align-items: center;
     border-radius: 20em;
-    margin-right: $spacing;
+
     flex: 1;
     cursor: pointer;
     background: white;
 
     &.email {
-      background: rgba($black, .08);
+      background: none;
       border: none;
       box-shadow: none;
       cursor: text;

@@ -1,38 +1,66 @@
 <template>
   <div class='about'>
-    <div
-      class='video'
-      :style="{background: 'url(misc/about.jpg)'}"
-    >
-    <img src='misc/about.jpg' />
-    </div>
-    <div class='about-content'>
-      <description></description>
-      <div class='actions'>
-        <btn value='hi@hackerloop.com' :big='true' :email='true' :icon='"MailIcon"' :href='"mailto:hihackerloop.com"'>hi@hackerloop.com</btn>
-        <btn :big='true' :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>Contact us on messenger</btn>
+    <container>
+      <div
+        class='video'
+        :style="{backgroundImage: 'url(misc/about.jpg)'}"
+      >
+      <img src='misc/about.jpg' />
       </div>
-    </div>
+      <div class='about-content'>
+        <description></description>
+        <div class='actions'>
+          <btn :big='true' :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>Contact us on messenger</btn>
+          <btn value='hi@hackerloop.com' :big='true' :email='true' :icon='"MailIcon"' :href='"mailto:hihackerloop.com"'>hi@hackerloop.com</btn>
+          <a class='place input'>
+            <place-icon></place-icon>
+            <label>
+              Paris, Berlin & Tallin
+            </label>
+          </a>
+        </div>
+      </div>
+    </container>
   </div>
 </template>
 
 <script>
   import Btn from './Button'
   import Description from './Description'
+  import PlaceIcon from './svg/Place'
+  import Container from './container'
 
   export default {
-    components: { Btn, Description }
+    components: { Btn, Description, PlaceIcon, Container }
   }
 </script>
 
 <style lang='scss' scoped>
+.container {
+  position: relative;
+  z-index: 1;
+}
   .about {
-    position: relative;
     z-index: 1;
-    padding: ($spacing * 5) 0;
-    padding-top: 0;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 250px;
+      background: #FAFAFA;
+      content: '';
+      z-index: 0;
+    }
+
     @media(max-width: 650px) {
       display: block;
+      margin-top: 30px;
+      &:before {
+        top: -30px;
+      }
     }
   }
 
@@ -45,6 +73,7 @@
     display: block;
     cursor: pointer;
     background-color: #E7E3E0;
+    box-shadow: 0px 0px 0px 1px rgba($black, .1);
 
     &:hover {
       &:before {
@@ -58,6 +87,7 @@
       background: white;
       position: absolute;
       left: 0;
+      z-index: 99;
       right: 0;
       bottom: 0;
       top: 0;
@@ -74,6 +104,7 @@
       width: 100%;
       border-radius: $video-radius;
       display: block;
+      opacity: .9;
     }
 
     @media(max-width: 650px) {
@@ -99,47 +130,77 @@
 
   .about-content{
     font-size: 18px;
-    padding: ($spacing * 2) 0;
     display: flex;
     flex-flow: column;
     line-height: 1.2;
-    margin-top: $spacing * 3;
     text-align: center;
+    padding: 100px 0;
+    line-height: 1.5;
 
     @media(max-width: 710px) {
-      font-size: 16px;
+      font-size: 18px;
       max-width: 400px;
+      text-align: center;
       margin: auto;
-      padding: 0;
-      margin-top: $spacing * 5;
+      padding-top: 20px;
+      text-align: left;
+    }
+
+    .place {
+      display: inline-flex;
+      align-items: center;
+      margin-right: $spacing;
+      padding: 0 12px;
+      font-size: 16px;
+      background: none;
+      flex: 1;
+      margin: 0;
+      color: rgba($black, .8);
+
+      label {
+        margin-left: auto;
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+        fill: white;
+        stroke: black;
+        stroke-width: 1.6;
+        stroke: rgba(#212A2F, .5);
+        margin-right: 8px;
+      }
     }
 
     .actions {
       margin-top: auto;
       display: flex;
-      padding-top: $spacing * 1.5;
-
-      max-width: 600px;
       margin: auto;
       width: 100%;
+      margin-top: $spacing * 3;
 
-      @media(max-width: 650px) {
-        padding-top: $spacing * 2;
+      & /deep/ .input, & .input {
+        &:first-child {
+          flex: 1.3;
+          margin-right: 12px;
+        }
       }
 
       @media(max-width: 710px) {
         display: block;
+        line-height: 40px;
 
-        & /deep/ .input {
+        & /deep/ .input, & .input {
           margin: 0;
           display: flex;
-          margin-bottom: $spacing;
-
-
+          margin:0 !important;
+          margin-bottom: $spacing * 1.5 !important;
+          padding-right: 12px;
 
           &:last-child {
-            margin-bottom: none;
+            margin-bottom: 0 !important;
           }
+
         }
       }
     }
