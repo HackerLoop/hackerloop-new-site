@@ -81,6 +81,29 @@
   @media(max-width: 650px) {
     margin: auto;
   }
+
+  .input.email {
+    background: transparent;
+    box-shadow: none;
+
+
+    ::selection {
+      background: white;
+      color: white;
+    }
+
+    & /deep/ svg {
+      flex: 0 0 14px;
+      height: 16px;
+    }
+    & /deep/ svg g {
+      stroke: white;
+      opacity: 1;
+    }
+
+    & /deep/ input { color: white !important; }
+  }
+
   .input {
     display: flex;
     margin-bottom: $spacing;
