@@ -32,7 +32,7 @@
             tagline: 'Hardware productizing',
             clients: ['ubisoft', 'buzzman'],
             color: '#68D80B',
-            pattern: false,
+            nopattern: true,
             youtube_id: '22KZBhrksbk'
 
           },
