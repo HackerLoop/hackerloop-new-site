@@ -53,7 +53,7 @@ module.exports = {
   */
   plugins: [
     {src: '@/plugins/tilt.min.js', ssr: false},
-    {src: '@/plugins/plyr', ssr: false}
+    {src: '@/plugins/youtube', ssr: false}
   ],
 
   /*

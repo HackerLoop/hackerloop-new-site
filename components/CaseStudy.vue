@@ -4,15 +4,9 @@
   >
     <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive'>
       <div class='video' :style='{height: height}'>
-
-          <vue-plyr ref='plyr' :options='{autoplay: true}' >
-            <div class="plyr__video-embed" @click='(e)=>e.stopPropagation()'>
-              <iframe
-                :src="`https://www.youtube.com/embed/${youtube_id}?iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1`"
-                allowfullscreen allowtransparency allow="autoplay">
-              </iframe>
-            </div>
-          </vue-plyr>
+          <no-ssr>
+            <youtube @ready='playerReady' :video-id="youtube_id" ref="youtube" ></youtube>
+          </no-ssr>
       </div>
 
       <a @click='dismiss' class='cross'>
@@ -70,6 +64,9 @@
       dismiss(e) {
         this.setActiveCase(null)
         e.stopPropagation()
+      },
+      playerReady(e) {
+        this.player.playVideo()
       }
 
     },
@@ -84,8 +81,8 @@
           return 'white.png'
         }
       },
-      player () {
-        return this.$refs.plyr.player
+      player() {
+        return this.$refs.youtube.player
       }
     },
     data() {
