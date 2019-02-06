@@ -318,8 +318,10 @@
       position: relative;
 
       &.active {
-        figure {
-          transform: translateX(50px) rotate(2deg);
+        @media(min-width: 700px) {
+          figure {
+            transform: translateX(50px) rotate(2deg);
+          }
         }
       }
 
@@ -327,9 +329,9 @@
         position: absolute;
         left: -100px;
         right: 0;
-        top: -80px;
+        top: -140px;
         height: 150px;
-        transform: rotate(-5deg);
+        transform: rotate(-5deg) !important;
       }
 
       figure {
