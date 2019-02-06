@@ -28,7 +28,7 @@
   import Btn from './Button'
   import Description from './Description'
   import PlaceIcon from './svg/Place'
-  import Container from './container'
+  import Container from './Container'
 
   export default {
     components: { Btn, Description, PlaceIcon, Container }
