@@ -2,7 +2,7 @@
   <div class='about'>
     <div
       class='video'
-      :style="{background: 'url(misc/about.jpg)'}"
+      :style="{background: `url(misc/${this.image_path})`}"
     >
     <img src='misc/about.jpg' />
     </div>
@@ -21,7 +21,12 @@
   import Description from './Description'
 
   export default {
-    components: { Btn, Description }
+    components: { Btn, Description },
+    data () {
+      return {
+        image_path: 'about.jpg'
+      }
+    }
   }
 </script>
 
