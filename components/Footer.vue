@@ -9,13 +9,13 @@
     </div>
     <div class='actions'>
       <btn :icon='"MailIcon"' :email='true' value='hi@hackerloop.com' >hi@hackerloop.com</btn>
-      <btn :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>Messenger</btn>
       <a class='place input'>
         <place-icon></place-icon>
         <label>
           Paris, Berlin & Tallin
         </label>
       </a>
+      <btn :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>Messenger</btn>
     </div>
   </container>
 </div>
@@ -85,7 +85,7 @@
   .input.email {
     background: transparent;
     box-shadow: none;
-
+    margin-bottom: 0;
 
     ::selection {
       background: white;
@@ -98,7 +98,7 @@
     }
     & /deep/ svg g {
       stroke: white;
-      opacity: 1;
+      opacity: .9;
     }
 
     & /deep/ input { color: white !important; }
@@ -119,11 +119,15 @@
       box-shadow: none;
       font-size: 14px;
       padding: 0 $spacing * 1.5;
-      border: 1px solid #595959;
       line-height: 32px;
       border-radius: 20em;
       background: transparent;
       box-shadow: none;
+      svg {
+        width: 16px;
+        height: 16px;
+        opacity: .6;
+      }
       label {
         flex: 1 ;
       }
