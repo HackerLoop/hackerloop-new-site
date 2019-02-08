@@ -3,7 +3,7 @@
     <container>
       <div
         class='video'
-        :style="{backgroundImage: `url(misc/${this.image_filename}.jpg`}"
+        :style="{backgroundImage: `url(misc/${this.image_filename}.jpg)`}"
       >
         <img :src='`misc/${this.image_filename}.jpg`' ref='img' :data-hd='`misc/about_hd.jpg`' />
       </div>
@@ -43,7 +43,6 @@
       newImg.onload = function() {
           that.image_filename = "about_hd"
       }
-      console.log(this.$refs.img.dataset.hd)
       newImg.src = this.$refs.img.dataset.hd
     }
   }

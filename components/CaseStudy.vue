@@ -61,18 +61,11 @@
   export default {
     components: { Container, CrossIcon },
     props: ['title', 'slug', 'tagline', 'clients', 'color', 'i', 'youtube_id', 'activeCase', 'setActiveCase', 'nopattern'],
-    mounted() {
-      console.log(this.$refs.plyr)
-    },
     methods: {
       dismiss(e) {
         this.setActiveCase(null)
         e.stopPropagation()
-      },
-      playerReady(e) {
-        this.player.playVideo()
       }
-
     },
     computed: {
       isBlack: function() {
