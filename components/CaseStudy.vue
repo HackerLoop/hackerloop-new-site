@@ -2,24 +2,25 @@
   <div
     :class="{'slice': true, black: isBlack, '-video-active': videoActive, [slug]: true}"
   >
+    <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive'>
+      <div class='video' @click='$event.stopPropagation()' >
+        <div id='player' data-plyr-provider="youtube" :data-plyr-embed-id="youtube_id"></div>
+      </div>
+
+      <a @click='dismiss' class='cross'>
+        <CrossIcon :color='color'></CrossIcon>
+      </a>
+    </div>
     <div class='thumbnail-container' ref='thumbnail'>
       <div class='container'>
         <div
+          @mouseenter='thumbnailHovered = true'
+          @mouseleave='thumbnailHovered = false'
+
           class='thumbnail'
           :style='{backgroundImage: `url(case_study/${slug}/thumbnail.jpg)`}'
           @click='() => this.setActiveCase(this.slug)'
         >
-          <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive'>
-            <div class='video'>
-                <no-ssr>
-                  <youtube @ready='playerReady' :video-id="youtube_id" ref="youtube" ></youtube>
-                </no-ssr>
-            </div>
-
-            <a @click='dismiss' class='cross'>
-              <CrossIcon :color='color'></CrossIcon>
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -33,7 +34,7 @@
         ></figure>
       </div>
       <div class='helper'></div>
-      <div class='stripe'>
+      <div :class='{stripe: true, active: this.thumbnailHovered}'>
         <figure :style='{backgroundColor: color, backgroundImage: nopattern ? false : `url(case_study/${slug}/pattern.jpg)`}'></figure>
       </div>
     </div>
@@ -60,6 +61,9 @@
   export default {
     components: { Container, CrossIcon },
     props: ['title', 'slug', 'tagline', 'clients', 'color', 'i', 'youtube_id', 'activeCase', 'setActiveCase', 'nopattern'],
+    mounted() {
+      console.log(this.$refs.plyr)
+    },
     methods: {
       dismiss(e) {
         this.setActiveCase(null)
@@ -80,22 +84,27 @@
         } else {
           return 'white.png'
         }
-      },
-      player() {
-        return this.$refs.youtube.player
       }
     },
     data() {
       return {
-        videoActive: false
+        videoActive: false,
+        thumbnailHovered: false
       }
     },
 
     watch: {
       activeCase: function(newVal, oldVal) {
-        console.log(newVal)
         if(newVal == this.slug) {
           this.videoActive = true
+          setTimeout(() => {
+            const player = new Plyr('#player')
+            player.on('ready', event => {
+                const instance = event.detail.plyr;
+                instance.play()
+            });
+
+          })
         } else {
           this.videoActive = false
         }
@@ -105,7 +114,11 @@
 </script>
 
 <style lang='scss' scoped>
-
+@keyframes bounceIn {
+  to {
+    transform: scale(1) translateX(0);
+  }
+}
   .content {
     padding-right: $spacing * 10;
     max-width: 400px;
@@ -126,30 +139,23 @@
       }
     }
   }
+
   .cross {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: -($spacing * 2);
-    background: white;
-    border-radius: 50%;
-    height: 32px;
-    width: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-      opacity: 1;
-    }
-
-    svg {
-      width: 24px;
-      height: 24px;
-      stroke-width: 2;
-    }
-
-  }
+     position: absolute;
+     right: 0;
+     top: 0;
+     margin: $spacing * 4;
+     opacity: .8;
+     &:hover {
+       opacity: 1;
+     }
+     svg {
+       width: 40px;
+       height: 40px;
+       stroke: white;
+       stroke-width: 1.5;
+     }
+   }
 
   .video-container {
     position: absolute;
@@ -160,21 +166,36 @@
     z-index: 999;
     display: flex;
     align-items: center;
+    @media(max-width: 700px) {
+      display: block;
+      padding-top: 160px;
+    }
 
     .video {
       position: relative;
       margin: auto;
-      height: 100%;
+      height: 400px;
+      max-width: 700px;
       width: 100%;
       border-radius: 10px;
       overflow: hidden;
       background: black;
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      animation: bounceIn .5s ease-in-out forwards;
+      transform: scale(.5) translateX(20%);
+      transform-origin: right;
+
+      @media(max-width: 700px) {
+        height: 184px;
+        width: 330px;
+        transform-origin: center;
+        transform: scale(1) translateX(0);
+      }
 
       & /deep/ iframe {
         width: 100%;
         position: absolute;
-        height: 100%;
+
         top: 0;
         left: 0;
         right: 0;
@@ -210,13 +231,13 @@
     font-size: 32px;
     margin: 0;
   }
+
   .slice {
-    height: 400px;
+    height: 420px;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
 
     &.-video-active {
       .thumbnail {
@@ -247,6 +268,19 @@
       }
     }
 
+    &.-video-active {
+
+      .thumbnail-container {
+        opacity: 0;
+      }
+
+      .thumbnail {
+        transform: scale(1.7) translateX(-20%);
+        @media(max-width: 700px) {
+          transform: scale(1) translateX(0);
+        }
+      }
+    }
 
     .container {
       width: 100%;
@@ -259,6 +293,7 @@
     .tagline {
       font-size: 18px;
       margin-top: $spacing;
+      line-height: 1.4;
     }
 
     &.black {
@@ -288,22 +323,30 @@
       flex: 1;
       position: relative;
 
+      &.active {
+        @media(min-width: 700px) {
+          figure {
+            transform: translateX(50px) rotate(2deg);
+          }
+        }
+      }
+
       @media (max-width: 700px) {
         position: absolute;
         left: -100px;
         right: 0;
-        top: -80px;
+        top: -140px;
         height: 150px;
-        transform: rotate(-5deg);
+        transform: rotate(-5deg) !important;
       }
 
       figure {
-        transition: .1s ease-in-out;
+        transition: .15s ease-in-out;
         position: absolute;
-        top: 0;
+        top: -80px;
         left: 0;
-        bottom: 0;
-        right: -30px;
+        bottom: -80px;
+        right: -80px;
         background-size: 220px !important;
       }
     }
@@ -324,7 +367,7 @@
         top: 0;
         background-position: center right;
         background-size: cover !important;
-        margin-right: -450px;
+        margin-right: -520px;
       }
     }
 
@@ -349,6 +392,7 @@
 
     &:hover {
       transform: scale(1);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
       &:before {
         opacity: 1;
       }

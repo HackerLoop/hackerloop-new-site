@@ -1,6 +1,7 @@
 const pkg = require('./package')
 const resolve = require('path').resolve
-
+const title       = "Hackerloop — Highly engaging live experiences and products that connect brands to customers"
+const description = "Hackerloop is a creative tech agency run by a collective of creatives, designers and engineers who love making crazy products and events."
 /* nuxt.config.js */
 // only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
 const base = process.env.DEPLOY_ENV === 'GH_PAGES' ? '/hackerloop-new-site/' : '';
@@ -18,15 +19,24 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: title,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description },
-      { name: 'robots', content: 'noindex' }
+      { hid: 'description', name: 'description', content: "Hackerloop is a creative tech agency run by a collective of creatives, designers and engineers who love making crazy products and events."},
+      { name: 'robots', content: 'noindex' },
+      { property: 'og:title', content: title },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'http://hackerloop.com' },
+      { property: 'og:image', content: '/misc/ogimage.jpg' },
+      { property: 'og:description', content: description },
+
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/misc/favicon.ico' }
+    ],
+    script: [
+      { src: 'https://cdn.plyr.io/3.4.8/plyr.js' }
     ]
   },
 
@@ -52,7 +62,6 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '@/plugins/youtube', ssr: false}
   ],
 
   /*

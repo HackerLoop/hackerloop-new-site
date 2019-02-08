@@ -3,13 +3,11 @@
     <container>
       <navbar></navbar>
       <div class='header'>
-        <hero-mask></hero-mask>
+        <hero-mask :gif='"1.gif"'></hero-mask>
         <h1>Highly engaging live experiences and products  that connect brands to customers</h1>
       </div>
     </container>
-    <container>
-      <about></about>
-    </container>
+    <about></about>
     <case-studies></case-studies>
     <Footer></Footer>
   </div>
@@ -39,13 +37,12 @@ hr {
 }
 
 .header {
-  padding: ($spacing * 8) 0;
-  padding-top: $spacing * 11;
+  padding: 100px 0;
+  padding-top: 125px;
   text-align: center;
 
   @media(max-width: 650px) {
-    padding-top: $spacing * 13 !important;
-
+    // padding-top: $spacing * 13 !important;
   }
 
 
