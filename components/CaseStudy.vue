@@ -1,8 +1,8 @@
 <template>
   <div
-    :class="{'slice': true, black: isBlack, '-video-active': videoActive, [slug]: true}"
+    :class="{'slice': true, black: isBlack, '-video-active': videoActive && !mainVideoPlaying, [slug]: true}"
   >
-    <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive'>
+    <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive && !mainVideoPlaying'>
       <div class='video' @click='$event.stopPropagation()' >
         <div id='player' data-plyr-provider="youtube" :data-plyr-embed-id="youtube_id"></div>
       </div>
@@ -57,6 +57,7 @@
 <script>
   import Container from './Container'
   import CrossIcon from './svg/Cross'
+  import { mapGetters } from 'vuex'
 
   export default {
     components: { Container, CrossIcon },
@@ -77,7 +78,9 @@
         } else {
           return 'white.png'
         }
-      }
+      },
+      ...mapGetters(['mainVideoPlaying'])
+
     },
     data() {
       return {
@@ -88,8 +91,10 @@
 
     watch: {
       activeCase: function(newVal, oldVal) {
+
         if(newVal == this.slug) {
           this.videoActive = true
+
           setTimeout(() => {
             const player = new Plyr('#player')
             player.on('ready', event => {

@@ -19,6 +19,7 @@
     components: { CaseStudy },
     methods: {
       setActiveCase(slug) {
+        this.$store.commit('setMainVideoPlaying', false)
         this.activeCase = slug
       }
     },

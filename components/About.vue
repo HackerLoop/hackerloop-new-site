@@ -4,7 +4,11 @@
       <div
         class='video'
         :style="{backgroundImage: `url(misc/${this.image_filename}.jpg)`}"
+        @click='activateVideo'
       >
+        <div class='video-container' v-if='this.mainVideoPlaying'>
+        <div id='player2' data-plyr-provider="youtube" :data-plyr-embed-id="'ntWeDBCz6Cs'"></div>
+        </div>
         <img :src='`misc/${this.image_filename}.jpg`' ref='img' :data-hd='`misc/about_hd.jpg`' />
       </div>
       <div class='about-content'>
@@ -29,12 +33,26 @@
   import Description from './Description'
   import PlaceIcon from './svg/Place'
   import Container from './Container'
+  import { mapGetters } from 'vuex'
 
   export default {
     components: { Btn, Description, PlaceIcon, Container },
     data () {
       return {
         image_filename: 'about'
+      }
+    },
+    methods: {
+      activateVideo() {
+        this.$store.commit('setMainVideoPlaying', true)
+        setTimeout(() => {
+          const player = new Plyr('#player2')
+          player.on('ready', event => {
+              const instance = event.detail.plyr;
+              instance.play()
+          });
+
+        })
       }
     },
     mounted() {
@@ -44,11 +62,32 @@
           that.image_filename = "about_hd"
       }
       newImg.src = this.$refs.img.dataset.hd
+    },
+    computed: {
+      ...mapGetters(['mainVideoPlaying'])
     }
   }
 </script>
 
 <style lang='scss' scoped>
+
+.video-container /deep/ .plyr--video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+
+  .plyr__video-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
 .container {
   position: relative;
   z-index: 1;
@@ -82,12 +121,13 @@
     background-size: cover !important;
     background-position: center center !important;
     border-radius: $video-radius;
+    overflow: hidden;
     position: relative;
     display: block;
     cursor: pointer;
     background-color: #E7E3E0;
     box-shadow: 0px 0px 0px 1px rgba($black, .1);
-
+    max-height: 392px;
     &:hover {
       &:before {
         opacity: 1;
