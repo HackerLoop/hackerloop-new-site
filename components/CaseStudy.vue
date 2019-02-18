@@ -3,10 +3,8 @@
     :class="{'slice': true, black: isBlack, '-video-active': videoActive, [slug]: true}"
   >
     <div :class='{"video-container": true}' @click='dismiss' v-if='videoActive'>
-      <div class='video' >
-          <no-ssr>
-            <youtube @ready='playerReady' :video-id="youtube_id" ref="youtube" ></youtube>
-          </no-ssr>
+      <div class='video' @click='$event.stopPropagation()' >
+        <div id='player' data-plyr-provider="youtube" :data-plyr-embed-id="youtube_id"></div>
       </div>
 
       <a @click='dismiss' class='cross'>
@@ -67,11 +65,7 @@
       dismiss(e) {
         this.setActiveCase(null)
         e.stopPropagation()
-      },
-      playerReady(e) {
-        this.player.playVideo()
       }
-
     },
     computed: {
       isBlack: function() {
@@ -83,9 +77,6 @@
         } else {
           return 'white.png'
         }
-      },
-      player() {
-        return this.$refs.youtube.player
       }
     },
     data() {
@@ -99,6 +90,14 @@
       activeCase: function(newVal, oldVal) {
         if(newVal == this.slug) {
           this.videoActive = true
+          setTimeout(() => {
+            const player = new Plyr('#player')
+            player.on('ready', event => {
+                const instance = event.detail.plyr;
+                instance.play()
+            });
+
+          })
         } else {
           this.videoActive = false
         }
@@ -168,7 +167,7 @@
     .video {
       position: relative;
       margin: auto;
-      height: 90%;
+      height: 400px;
       max-width: 700px;
       width: 100%;
       border-radius: 10px;
@@ -189,7 +188,7 @@
       & /deep/ iframe {
         width: 100%;
         position: absolute;
-        height: 100%;
+
         top: 0;
         left: 0;
         right: 0;
@@ -227,7 +226,7 @@
   }
 
   .slice {
-    height: 400px;
+    height: 420px;
     display: flex;
     align-items: center;
     position: relative;

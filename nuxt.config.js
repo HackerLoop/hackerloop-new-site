@@ -34,6 +34,9 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/misc/favicon.ico' }
+    ],
+    script: [
+      { src: 'https://cdn.plyr.io/3.4.8/plyr.js' }
     ]
   },
 
@@ -59,7 +62,6 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '@/plugins/youtube', ssr: false}
   ],
 
   /*

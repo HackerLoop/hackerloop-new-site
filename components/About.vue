@@ -3,14 +3,14 @@
     <container>
       <div
         class='video'
-        :style="{backgroundImage: 'url(misc/about.jpg)'}"
+        :style="{backgroundImage: `url(misc/${this.image_filename}.jpg)`}"
       >
-      <img src='misc/about.jpg' />
+        <img :src='`misc/${this.image_filename}.jpg`' ref='img' :data-hd='`misc/about_hd.jpg`' />
       </div>
       <div class='about-content'>
         <description></description>
         <div class='actions'>
-          <btn :big='true' :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>Contact us on messenger</btn>
+          <btn :big='true' :icon='"MessengerIcon"' :href='"https://m.me/hackerloop"'>Contact us on Messenger</btn>
           <btn value='hi@hackerloop.com' :big='true' :email='true' :icon='"MailIcon"' :href='"mailto:hihackerloop.com"'>hi@hackerloop.com</btn>
           <a class='place input'>
             <place-icon></place-icon>
@@ -31,7 +31,20 @@
   import Container from './Container'
 
   export default {
-    components: { Btn, Description, PlaceIcon, Container }
+    components: { Btn, Description, PlaceIcon, Container },
+    data () {
+      return {
+        image_filename: 'about'
+      }
+    },
+    mounted() {
+      var newImg = new Image
+      const that = this
+      newImg.onload = function() {
+          that.image_filename = "about_hd"
+      }
+      newImg.src = this.$refs.img.dataset.hd
+    }
   }
 </script>
 
@@ -104,7 +117,6 @@
       width: 100%;
       border-radius: $video-radius;
       display: block;
-      opacity: .9;
     }
 
     @media(max-width: 650px) {
@@ -115,7 +127,7 @@
     &:after {
       transform: scale(1) translateY(0) translateZ(0);
       filter: blur(10px);
-      opacity: 0.9;
+      opacity: .9;
       content: '';
       position: absolute;
       top: 0;
