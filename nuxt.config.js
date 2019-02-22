@@ -28,7 +28,7 @@ module.exports = {
       { property: 'og:title', content: title },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://hackerloop.com' },
-      { property: 'og:image', content: '/misc/ogimage.jpg' },
+      { property: 'og:image', content: '/misc/about.jpg' },
       { property: 'og:description', content: description },
 
     ],
