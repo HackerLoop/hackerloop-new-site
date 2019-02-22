@@ -4,8 +4,8 @@ const title       = "Hackerloop — Highly engaging live experiences and product
 const description = "Hackerloop is a creative tech agency run by a collective of creatives, designers and engineers who love making crazy products and events."
 /* nuxt.config.js */
 // only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
-const base = process.env.DEPLOY_ENV === 'GH_PAGES' ? '/' : '';
-const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+const base = process.env.DEPLOY_ENV === 'master' ? '' : '';
+const routerBase = process.env.DEPLOY_ENV === 'master' ? {
   router: {
     base: base
   }
