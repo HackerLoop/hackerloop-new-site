@@ -1,7 +1,7 @@
 {
   "name": "hackerloop.com",
   "version": "1.0.0",
-  "description": "Hackerloop public website",
+  "description": "Hackerloop website",
   "author": "tchret",
   "private": true,
   "scripts": {

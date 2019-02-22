@@ -4,7 +4,7 @@ const title       = "Hackerloop — Highly engaging live experiences and product
 const description = "Hackerloop is a creative tech agency run by a collective of creatives, designers and engineers who love making crazy products and events."
 /* nuxt.config.js */
 // only add `router.base = '/<repository-name>/'` if `DEPLOY_ENV` is `GH_PAGES`
-const base = process.env.DEPLOY_ENV === 'GH_PAGES' ? '/hackerloop-new-site/' : '';
+const base = process.env.DEPLOY_ENV === 'GH_PAGES' ? '/' : '';
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
     base: base
@@ -23,11 +23,11 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: "Hackerloop is a creative tech agency run by a collective of creatives, designers and engineers who love making crazy products and events."},
+      { hid: 'description', name: 'description', content: "Highly engaging live experiences and products that connect brands to customers"},
       { name: 'robots', content: 'noindex' },
       { property: 'og:title', content: title },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'http://hackerloop.com' },
+      { property: 'og:url', content: 'https://hackerloop.com' },
       { property: 'og:image', content: '/misc/ogimage.jpg' },
       { property: 'og:description', content: description },
 
