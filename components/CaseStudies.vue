@@ -28,13 +28,12 @@
         activeCase: null,
         items: [
           {
-            title: 'Nosulus Rift',
-            slug: 'nosulus',
-            tagline: 'Hardware productizing',
-            clients: ['ubisoft', 'buzzman'],
-            color: '#68D80B',
-            nopattern: true,
-            youtube_id: '22KZBhrksbk'
+            title: 'Watch Dogs 2',
+                slug: 'watch_dogs_2',
+                tagline: 'Interactive live experience',
+                clients: ['ubisoft'],
+                color: '#B900FF',
+                youtube_id: '6Y1dq1RvzHk'
 
           },
           {
@@ -47,17 +46,18 @@
 
           },
           {
-            title: 'Watch Dogs 2',
-            slug: 'watch_dogs_2',
-            tagline: 'Twitch extension and event management',
-            clients: ['ubisoft'],
-            color: '#B900FF',
-            youtube_id: '6Y1dq1RvzHk'
+            title: 'Nosulus Rift',
+            slug: 'nosulus',
+            tagline: 'Hardware productizing',
+            clients: ['ubisoft', 'buzzman'],
+            color: '#68D80B',
+            nopattern: true,
+            youtube_id: '22KZBhrksbk'
           },
           {
-            title: 'TwitchCon17',
+            title: 'South Park Launch @TwitchCon',
             slug: 'twitchcon17',
-            tagline: 'Twitch extension and event management',
+            tagline: 'Interactive live experience',
             clients: ['ubisoft', 'divimode'],
             color: '#6441A5',
             youtube_id: 'N47eYIFGBBo'
