@@ -44,7 +44,7 @@ svg {
   position: absolute;
   overflow: hidden;
   background: $black;
-  left: 2px;
+  left: 0;
   right: 2px;
   bottom: 2px;
   top: 2px;
