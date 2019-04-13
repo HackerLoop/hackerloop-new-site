@@ -24,7 +24,6 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: "Highly engaging live experiences and products that connect brands to customers"},
-      { name: 'robots', content: 'noindex' },
       { property: 'og:title', content: title },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://hackerloop.com' },
